@@ -861,16 +861,35 @@
   .app-shell {
     height: auto;
     min-height: 100vh;
+    min-height: 100dvh;
   }
 
   .toolbar {
-    padding: 0 12px;
+    padding: 0 10px;
     height: 44px;
-    gap: 8px;
+    gap: 6px;
   }
 
   .brand {
     font-size: 13px;
+  }
+
+  .toolbar-right {
+    gap: 2px;
+  }
+
+  .theme-toggle {
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+
+  .theme-toggle-icon {
+    font-size: 13px;
+  }
+
+  .github-link {
+    width: 28px;
+    height: 28px;
   }
 
   .workspace {
@@ -881,30 +900,135 @@
   .sidebar {
     overflow: visible;
     border-right: none;
-    border-bottom: 1px solid var(--border);
     order: 1;
   }
 
   .canvas {
-    min-height: 50vh;
+    min-height: 40vh;
+    min-height: 40dvh;
     order: 0;
-    padding: 16px;
+    padding: 12px;
   }
 
   .preview-svg svg {
-    max-height: 50vh;
+    max-height: 40vh;
+    max-height: 40dvh;
   }
 
-  .button-row,
+  /* Mode picker — single column on mobile */
+  .mode-card-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    padding: 0 6px 6px;
+  }
+
+  .mode-card {
+    padding: 6px;
+  }
+
+  .mode-card-name {
+    font-size: 10px;
+  }
+
+  .mode-card-desc {
+    font-size: 9px;
+  }
+
+  /* Control panel */
+  .control-panel {
+    padding: 10px;
+  }
+
+  .dimension-group {
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  /* Buttons stay 2-col on mobile for compact layout */
+  .button-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .button-row button {
+    min-height: 36px;
+    font-size: 12px;
+    padding: 6px 6px;
+  }
+
   .two-up {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Explorer */
+  .explorer-overlay {
+    padding: 8px;
+  }
+
+  .explorer-panel {
+    padding: 16px;
+    border-radius: var(--borderRadiusLarge);
+  }
+
+  .explorer-header {
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .explorer-header h2 {
+    font-size: 16px;
   }
 
   .explorer-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 
-  .explorer-overlay {
-    padding: 16px;
+  .explorer-seed {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+
+  /* Fullscreen */
+  .fullscreen-art {
+    width: 96vw;
+    height: 96vh;
+    height: 96dvh;
+  }
+
+  /* Sliders */
+  .slider-row {
+    grid-template-columns: 1fr 3rem;
+  }
+
+  /* Toast */
+  .toast {
+    bottom: 12px;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 380px) {
+  .toolbar {
+    padding: 0 8px;
+    gap: 4px;
+  }
+
+  .brand {
+    font-size: 12px;
+  }
+
+  .mode-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+
+  .two-up {
+    grid-template-columns: 1fr;
   }
 }
