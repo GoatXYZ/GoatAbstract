@@ -155,7 +155,50 @@ const downloadPng = async (svgMarkup: string, width: number, height: number, mod
   downloadBlob(blob, `goatabstract-${mode}.png`)
 }
 
+const parseRenderParams = (): ArtSettings | null => {
+  const params = new URLSearchParams(window.location.search)
+  if (!params.has('render')) return null
+
+  const seed = params.get('seed') || createRandomSeed()
+  const w = Math.max(64, Math.round(Number(params.get('w')) || 1600))
+  const h = Math.max(64, Math.round(Number(params.get('h')) || 900))
+  const modeParam = params.get('mode')
+  const modeEntry = modeParam
+    ? MODE_REGISTRY.find(m => m.id === modeParam)
+    : MODE_REGISTRY[Math.floor(Math.random() * MODE_REGISTRY.length)]
+  const mode = modeEntry ?? MODE_REGISTRY[0]
+
+  const lineRaw = params.get('line')
+  const bgRaw = params.get('bg')
+  const palette = (!lineRaw && !bgRaw) ? randomPalette() : {
+    lineColor: lineRaw && /^[0-9a-f]{6}$/i.test(lineRaw) ? `#${lineRaw}` : '#ffffff',
+    backgroundColor: bgRaw && /^[0-9a-f]{6}$/i.test(bgRaw) ? `#${bgRaw}` : '#000000',
+  }
+
+  return {
+    ...buildModeSettings({ width: w, height: h, seed }, mode.id, 'dark'),
+    ...palette,
+  } as ArtSettings
+}
+
+function RenderMode({ settings }: { settings: ArtSettings }) {
+  const art = generateArt(settings)
+  return (
+    <div
+      className="render-mode"
+      dangerouslySetInnerHTML={{ __html: art.svg }}
+    />
+  )
+}
+
+const RENDER_SETTINGS = parseRenderParams()
+
 function App() {
+  if (RENDER_SETTINGS) return <RenderMode settings={RENDER_SETTINGS} />
+  return <Editor />
+}
+
+function Editor() {
   const initialUrlSettings = parseUrlSettings()
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
   const [settings, setSettings] = useState<ArtSettings>(() => {

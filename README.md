@@ -114,6 +114,53 @@ src/
 
 ---
 
+## 🔌 Render API (Fake API for Embeds)
+
+Use query params to generate art with no UI — just the raw SVG filling the viewport. Works in iframes, browser tabs, and bookmarks.
+
+### Base URL
+
+```
+https://goatxyz.github.io/GoatAbstract/?render
+```
+
+### Parameters
+
+| Param | Description | Default |
+|---|---|---|
+| `render` | **Required.** Enables render mode (no UI). | — |
+| `seed` | Seed string for deterministic output. | Random |
+| `mode` | Art mode ID (e.g. `spiral-arms`, `marble-veins`). | Random |
+| `w` | Width in pixels. | `1600` |
+| `h` | Height in pixels. | `900` |
+| `line` | Stroke color as 6-digit hex (no `#`). | Random |
+| `bg` | Background color as 6-digit hex (no `#`). | Random |
+
+### Examples
+
+```
+# 🎲 Fully random
+https://goatxyz.github.io/GoatAbstract/?render
+
+# 🌱 Deterministic — same seed = same art
+https://goatxyz.github.io/GoatAbstract/?render&seed=hello
+
+# 🎯 Specific mode + seed
+https://goatxyz.github.io/GoatAbstract/?render&seed=galaxy&mode=spiral-arms
+
+# 📐 Custom dimensions + colors
+https://goatxyz.github.io/GoatAbstract/?render&seed=fire&mode=lightning-bolts&w=800&h=400&line=ffd700&bg=0a0a1a
+
+# 🖼️ Embed in an iframe
+<iframe src="https://goatxyz.github.io/GoatAbstract/?render&seed=poster" width="800" height="400" style="border:none"></iframe>
+```
+
+### Available Mode IDs
+
+`noise-dunes` · `contour-rings` · `ripple-fields` · `orbit-arcs` · `interference-grids` · `flow-ribbons` · `radiant-bursts` · `thread-mesh` · `marble-veins` · `iso-blobs` · `spiral-arms` · `dot-matrix` · `lightning-bolts` · `voronoi-edges` · `wave-collision` · `crosshatch` · `pendulum-traces` · `shatter-lines` · `smoke-plumes` · `hex-weave`
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites

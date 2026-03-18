@@ -10,6 +10,29 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   Render mode — bare SVG, no UI
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.render-mode {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.render-mode svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    Toolbar — Fluent acrylic navbar
    ═══════════════════════════════════════════════════════════════════════════ */
 
