@@ -40,6 +40,7 @@ const generate = (settings: ArtSettings): WavePath[] => {
 export const crosshatchDefinition: ModeDefinition = {
   id: 'crosshatch',
   label: 'Crosshatch',
+  description: 'Engraving-style layered hatching',
   themeColors: {
     dark: { lineColor: '#a0a0a0', backgroundColor: '#121212' },
     light: { lineColor: '#333333', backgroundColor: '#f8f8f4' },

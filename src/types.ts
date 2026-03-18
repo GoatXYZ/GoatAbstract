@@ -188,6 +188,7 @@ export type ThemeColors = {
 export type ModeDefinition = {
   id: ModeId
   label: string
+  description: string
   params: ParamDescriptor[]
   themeColors: ThemeColors
   defaults: Record<string, number>

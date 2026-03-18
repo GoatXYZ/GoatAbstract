@@ -46,6 +46,7 @@ const generateRadiantBursts = (settings: ArtSettings): WavePath[] => {
 export const radiantBurstsDefinition: ModeDefinition = {
   id: 'radiant-bursts',
   label: 'Radiant Bursts',
+  description: 'Rays radiating from a focal point',
   themeColors: {
     dark: { lineColor: '#fcd34d', backgroundColor: '#1a1306' },
     light: { lineColor: '#b45309', backgroundColor: '#fffbeb' },

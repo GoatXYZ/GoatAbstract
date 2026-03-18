@@ -45,6 +45,7 @@ const generate = (settings: ArtSettings): WavePath[] => {
 export const waveCollisionDefinition: ModeDefinition = {
   id: 'wave-collision',
   label: 'Wave Collision',
+  description: 'Overlapping circular wave interference',
   themeColors: {
     dark: { lineColor: '#60c0e0', backgroundColor: '#0a1018' },
     light: { lineColor: '#0a6080', backgroundColor: '#f0f8ff' },

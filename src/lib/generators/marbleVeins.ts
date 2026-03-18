@@ -64,6 +64,7 @@ const generateMarbleVeins = (settings: ArtSettings): WavePath[] => {
 export const marbleVeinsDefinition: ModeDefinition = {
   id: 'marble-veins',
   label: 'Marble Veins',
+  description: 'Branching mineral crack networks',
   themeColors: {
     dark: { lineColor: '#d6d3d1', backgroundColor: '#111110' },
     light: { lineColor: '#44403c', backgroundColor: '#fafaf9' },

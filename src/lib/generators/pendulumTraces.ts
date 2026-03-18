@@ -40,6 +40,7 @@ const generate = (settings: ArtSettings): WavePath[] => {
 export const pendulumTracesDefinition: ModeDefinition = {
   id: 'pendulum-traces',
   label: 'Pendulum Traces',
+  description: 'Lissajous / harmonograph curves',
   themeColors: {
     dark: { lineColor: '#c084fc', backgroundColor: '#120a1a' },
     light: { lineColor: '#7c3aed', backgroundColor: '#faf5ff' },

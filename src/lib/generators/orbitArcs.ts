@@ -50,6 +50,7 @@ const generateOrbitArcs = (settings: ArtSettings): WavePath[] => {
 export const orbitArcsDefinition: ModeDefinition = {
   id: 'orbit-arcs',
   label: 'Orbit Arcs',
+  description: 'Partial elliptical orbital paths',
   themeColors: {
     dark: { lineColor: '#93c5fd', backgroundColor: '#0d1520' },
     light: { lineColor: '#1d4ed8', backgroundColor: '#eff6ff' },

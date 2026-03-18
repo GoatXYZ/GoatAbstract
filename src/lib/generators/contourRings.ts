@@ -53,6 +53,7 @@ const generateContourRings = (settings: ArtSettings): WavePath[] => {
 export const contourRingsDefinition: ModeDefinition = {
   id: 'contour-rings',
   label: 'Contour Rings',
+  description: 'Topographic elevation loops',
   themeColors: {
     dark: { lineColor: '#7dd3a8', backgroundColor: '#0f1f1a' },
     light: { lineColor: '#1a5c3e', backgroundColor: '#f0f9f4' },

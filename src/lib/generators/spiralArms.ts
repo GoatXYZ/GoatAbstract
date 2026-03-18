@@ -38,6 +38,7 @@ const generate = (settings: ArtSettings): WavePath[] => {
 export const spiralArmsDefinition: ModeDefinition = {
   id: 'spiral-arms',
   label: 'Spiral Arms',
+  description: 'Logarithmic galaxy-like spirals',
   themeColors: {
     dark: { lineColor: '#00d4ff', backgroundColor: '#0a0e1a' },
     light: { lineColor: '#0066aa', backgroundColor: '#f0f6ff' },

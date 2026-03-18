@@ -5,6 +5,7 @@ import { generateNoiseDunes } from '../waveArt'
 export const noiseDunesDefinition: ModeDefinition = {
   id: 'noise-dunes',
   label: 'Noise Dunes',
+  description: 'Stacked horizontal wave bands',
   themeColors: {
     dark: { lineColor: '#c2956a', backgroundColor: '#1c1917' },
     light: { lineColor: '#9a6b3d', backgroundColor: '#faf8f5' },

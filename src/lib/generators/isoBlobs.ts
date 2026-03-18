@@ -61,6 +61,7 @@ const generateIsoBlobs = (settings: ArtSettings): WavePath[] => {
 export const isoBlobsDefinition: ModeDefinition = {
   id: 'iso-blobs',
   label: 'Iso Blobs',
+  description: 'Nested heat-map island contours',
   themeColors: {
     dark: { lineColor: '#86efac', backgroundColor: '#061610' },
     light: { lineColor: '#15803d', backgroundColor: '#f0fdf4' },

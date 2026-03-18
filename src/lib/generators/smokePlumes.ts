@@ -40,6 +40,7 @@ const generate = (settings: ArtSettings): WavePath[] => {
 export const smokePlumesDefinition: ModeDefinition = {
   id: 'smoke-plumes',
   label: 'Smoke Plumes',
+  description: 'Rising turbulent column traces',
   themeColors: {
     dark: { lineColor: '#a0a0b0', backgroundColor: '#101014' },
     light: { lineColor: '#4a4a5a', backgroundColor: '#f0f0f6' },

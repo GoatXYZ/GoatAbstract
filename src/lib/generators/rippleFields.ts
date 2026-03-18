@@ -53,6 +53,7 @@ const generateRippleFields = (settings: ArtSettings): WavePath[] => {
 export const rippleFieldsDefinition: ModeDefinition = {
   id: 'ripple-fields',
   label: 'Ripple Fields',
+  description: 'Concentric ripples from emitters',
   themeColors: {
     dark: { lineColor: '#67e8f9', backgroundColor: '#061418' },
     light: { lineColor: '#0e7490', backgroundColor: '#ecfeff' },

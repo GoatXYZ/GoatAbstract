@@ -56,6 +56,7 @@ const generate = (settings: ArtSettings): WavePath[] => {
 export const hexWeaveDefinition: ModeDefinition = {
   id: 'hex-weave',
   label: 'Hex Weave',
+  description: 'Organic hexagonal tessellation',
   themeColors: {
     dark: { lineColor: '#e0a050', backgroundColor: '#141008' },
     light: { lineColor: '#8a5a20', backgroundColor: '#fef8ee' },

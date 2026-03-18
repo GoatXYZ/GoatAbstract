@@ -44,6 +44,7 @@ const generate = (settings: ArtSettings): WavePath[] => {
 export const lightningBoltsDefinition: ModeDefinition = {
   id: 'lightning-bolts',
   label: 'Lightning Bolts',
+  description: 'Branching electrical discharge',
   themeColors: {
     dark: { lineColor: '#ffd700', backgroundColor: '#0a0a1a' },
     light: { lineColor: '#7c6800', backgroundColor: '#fefce8' },

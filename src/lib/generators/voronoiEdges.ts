@@ -52,6 +52,7 @@ const generate = (settings: ArtSettings): WavePath[] => {
 export const voronoiEdgesDefinition: ModeDefinition = {
   id: 'voronoi-edges',
   label: 'Voronoi Edges',
+  description: 'Irregular cracked-glass cell boundaries',
   themeColors: {
     dark: { lineColor: '#f08070', backgroundColor: '#1a1214' },
     light: { lineColor: '#9a3020', backgroundColor: '#fef2f2' },

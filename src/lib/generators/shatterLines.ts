@@ -55,6 +55,7 @@ const generate = (settings: ArtSettings): WavePath[] => {
 export const shatterLinesDefinition: ModeDefinition = {
   id: 'shatter-lines',
   label: 'Shatter Lines',
+  description: 'Radiating fracture patterns with ring fragments',
   themeColors: {
     dark: { lineColor: '#d0d0e0', backgroundColor: '#0e0e14' },
     light: { lineColor: '#3a3a50', backgroundColor: '#f5f5fa' },

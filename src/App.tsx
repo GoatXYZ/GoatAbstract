@@ -374,7 +374,6 @@ function App() {
         >
           GoatAbstract
         </button>
-        <ModeTabBar activeMode={settings.mode} onSelect={handleModeChange} />
         <div className="toolbar-right">
           <button
             className="theme-toggle"
@@ -404,6 +403,7 @@ function App() {
 
       <div className="workspace">
         <aside className="sidebar">
+          <ModeTabBar activeMode={settings.mode} onSelect={handleModeChange} />
           <ControlPanel
             settings={settings}
             modeParams={modeDef.params}

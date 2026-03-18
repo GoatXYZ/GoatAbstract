@@ -66,6 +66,7 @@ const generateFlowRibbons = (settings: ArtSettings): WavePath[] => {
 export const flowRibbonsDefinition: ModeDefinition = {
   id: 'flow-ribbons',
   label: 'Flow Ribbons',
+  description: 'Sweeping tapered ribbon currents',
   themeColors: {
     dark: { lineColor: '#f9a8d4', backgroundColor: '#1a0d13' },
     light: { lineColor: '#be185d', backgroundColor: '#fdf2f8' },

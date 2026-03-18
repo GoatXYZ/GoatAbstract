@@ -30,6 +30,7 @@ const generate = (settings: ArtSettings): WavePath[] => {
 export const dotMatrixDefinition: ModeDefinition = {
   id: 'dot-matrix',
   label: 'Dot Matrix',
+  description: 'Noise-modulated dot grids',
   themeColors: {
     dark: { lineColor: '#4ade80', backgroundColor: '#0a120a' },
     light: { lineColor: '#166534', backgroundColor: '#f0fdf4' },

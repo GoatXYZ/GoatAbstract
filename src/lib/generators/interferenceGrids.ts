@@ -79,6 +79,7 @@ const generateInterferenceGrids = (settings: ArtSettings): WavePath[] => {
 export const interferenceGridsDefinition: ModeDefinition = {
   id: 'interference-grids',
   label: 'Interference Grids',
+  description: 'Warped moiré line lattices',
   themeColors: {
     dark: { lineColor: '#fda4af', backgroundColor: '#1a090b' },
     light: { lineColor: '#be123c', backgroundColor: '#fff1f2' },

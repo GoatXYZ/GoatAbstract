@@ -59,6 +59,7 @@ const generateThreadMesh = (settings: ArtSettings): WavePath[] => {
 export const threadMeshDefinition: ModeDefinition = {
   id: 'thread-mesh',
   label: 'Thread Mesh',
+  description: 'Woven bidirectional strand fields',
   themeColors: {
     dark: { lineColor: '#c4b5fd', backgroundColor: '#130f1e' },
     light: { lineColor: '#6d28d9', backgroundColor: '#f5f3ff' },
