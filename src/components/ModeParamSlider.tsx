@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from 'react'
+import { useState, type ChangeEvent } from 'react'
 import type { ParamDescriptor } from '../types'
 
 type ModeParamSliderProps = {
@@ -10,13 +10,6 @@ type ModeParamSliderProps = {
 export function ModeParamSlider({ descriptor, value, onChange }: ModeParamSliderProps) {
   const [localValue, setLocalValue] = useState(String(value))
   const [editing, setEditing] = useState(false)
-
-  // Sync external value changes into local state
-  useEffect(() => {
-    if (!editing) {
-      setLocalValue(String(value))
-    }
-  }, [value, editing])
 
   const handleSliderChange = (event: ChangeEvent<HTMLInputElement>) => {
     const num = Number(event.target.value)
@@ -61,7 +54,7 @@ export function ModeParamSlider({ descriptor, value, onChange }: ModeParamSlider
           min={descriptor.min}
           max={descriptor.max}
           step={descriptor.step}
-          value={editing ? localValue : value}
+          value={editing ? localValue : String(value)}
           onChange={handleNumberChange}
           onFocus={handleNumberFocus}
           onBlur={handleNumberBlur}
