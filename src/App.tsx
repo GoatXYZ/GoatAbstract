@@ -314,9 +314,9 @@ function App() {
     }
   }
 
-  const handleSeedSelect = (seed: string) => {
+  const handleSeedSelect = (seed: string, lineColor: string, backgroundColor: string) => {
     startTransition(() => {
-      setSettings((current) => ({ ...current, seed }))
+      setSettings((current) => ({ ...current, seed, lineColor, backgroundColor }))
     })
     setExploring(false)
   }
