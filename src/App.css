@@ -191,6 +191,25 @@
   line-height: 1;
 }
 
+/* GitHub link */
+
+.github-link {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--borderRadiusMedium);
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: background var(--durationFast) var(--curveEasyEase), color var(--durationFast) var(--curveEasyEase);
+  text-decoration: none;
+}
+
+.github-link:hover {
+  background: var(--surface-raised);
+  color: var(--text-strong);
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    Workspace — sidebar + canvas
    ═══════════════════════════════════════════════════════════════════════════ */
