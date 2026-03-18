@@ -341,9 +341,9 @@
   border-radius: var(--borderRadiusMedium);
   background: var(--input-bg);
   color: var(--text-strong);
-  padding: 0 12px;
+  padding: 0 8px;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13px;
   transition: border-color var(--durationFast) var(--curveEasyEase), box-shadow var(--durationFast) var(--curveEasyEase);
 }
 
@@ -460,7 +460,7 @@
 
 .slider-row {
   display: grid;
-  grid-template-columns: 1fr 3.5rem;
+  grid-template-columns: 1fr 4rem;
   gap: 8px;
   align-items: center;
 }
@@ -509,14 +509,16 @@
 }
 
 .slider-number {
+  width: 100%;
+  min-width: 0;
   height: 26px;
   border: 1px solid var(--border-strong);
   border-radius: var(--borderRadiusMedium);
   background: var(--input-bg);
   color: var(--text-strong);
-  padding: 0 6px;
+  padding: 0 4px;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   text-align: right;
   transition: border-color var(--durationFast) var(--curveEasyEase);
 }
@@ -672,22 +674,28 @@
   inset: 0;
   z-index: 1000;
   background: rgba(0, 0, 0, 0.92);
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: zoom-out;
+  padding: 4vh 4vw;
   animation: overlayIn var(--durationNormal) var(--curveDecelerateMid);
 }
 
 .fullscreen-art {
-  width: 92vw;
-  height: 92vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .fullscreen-art svg {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 92vw;
+  max-height: 92vh;
+  max-height: 92dvh;
+  width: auto;
+  height: auto;
   display: block;
 }
 
@@ -998,7 +1006,7 @@
 
   /* Sliders */
   .slider-row {
-    grid-template-columns: 1fr 3rem;
+    grid-template-columns: 1fr 3.5rem;
   }
 
   /* Toast */
