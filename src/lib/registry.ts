@@ -67,14 +67,25 @@ const normalizeShared = <S extends ArtSettings>(settings: S): S => ({
     settings.opacityScale != null ? Math.min(2, Math.max(0.1, settings.opacityScale)) : undefined,
 });
 
-// ─── Top-level generate ──────────────────────────────────────────────────────
+// ─── Resolution-independent generation ──────────────────────────────────────
+
+const REF_SHORT_SIDE = 900;
 
 export const generateArt = (input: ArtSettings): ArtResult => {
   const def = getModeDefinition(input.mode);
   const normalized = def.normalize(normalizeShared(input));
-  const paths = def.generate(normalized);
+
+  // Generate at a reference resolution so visual weight stays consistent.
+  // SVG viewBox→viewport mapping scales everything uniformly (paths, strokes,
+  // spacing) to the actual output dimensions.
+  const scale = Math.max(1, Math.min(normalized.width, normalized.height) / REF_SHORT_SIDE);
+  const refW = Math.round(normalized.width / scale);
+  const refH = Math.round(normalized.height / scale);
+  const genSettings = scale > 1 ? { ...normalized, width: refW, height: refH } : normalized;
+
+  const paths = def.generate(genSettings);
   const result: ArtResult = { settings: normalized, paths, svg: "" };
-  result.svg = serializeArtSvg(result);
+  result.svg = serializeArtSvg(result, refW, refH);
   return result;
 };
 
