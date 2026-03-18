@@ -14,28 +14,28 @@ Type a seed, pick a style, get a unique vector composition. Same seed + same set
 
 Every mode uses a different geometric primitive and compositional rhythm — no two look alike.
 
-| | Mode | Visual Style |
-|---|---|---|
-| 🌊 | **Noise Dunes** | Stacked horizontal wave bands |
-| 🗺️ | **Contour Rings** | Topographic elevation loops |
-| 💧 | **Ripple Fields** | Concentric ripples from emitters |
-| 🪐 | **Orbit Arcs** | Partial elliptical orbital paths |
-| 📡 | **Interference Grids** | Warped moiré line lattices |
-| 🎀 | **Flow Ribbons** | Sweeping tapered ribbon currents |
-| ☀️ | **Radiant Bursts** | Rays radiating from a focal point |
-| 🧵 | **Thread Mesh** | Woven bidirectional strand fields |
-| 🪨 | **Marble Veins** | Branching mineral crack networks |
-| 🫧 | **Iso Blobs** | Nested heat-map island contours |
-| 🌀 | **Spiral Arms** | Logarithmic galaxy-like spirals |
-| ⚡ | **Lightning Bolts** | Branching electrical discharge |
-| 🔵 | **Dot Matrix** | Noise-modulated dot grids |
-| 🔶 | **Voronoi Edges** | Irregular cracked-glass cell boundaries |
-| 🌊 | **Wave Collision** | Overlapping circular wave interference |
-| ✏️ | **Crosshatch** | Engraving-style layered hatching |
-| 🎯 | **Pendulum Traces** | Lissajous / harmonograph curves |
-| 💥 | **Shatter Lines** | Radiating fracture patterns with ring fragments |
-| 💨 | **Smoke Plumes** | Rising turbulent column traces |
-| 🐝 | **Hex Weave** | Organic hexagonal tessellation |
+|     | Mode                   | Visual Style                                    |
+| --- | ---------------------- | ----------------------------------------------- |
+| 🌊  | **Noise Dunes**        | Stacked horizontal wave bands                   |
+| 🗺️  | **Contour Rings**      | Topographic elevation loops                     |
+| 💧  | **Ripple Fields**      | Concentric ripples from emitters                |
+| 🪐  | **Orbit Arcs**         | Partial elliptical orbital paths                |
+| 📡  | **Interference Grids** | Warped moiré line lattices                      |
+| 🎀  | **Flow Ribbons**       | Sweeping tapered ribbon currents                |
+| ☀️  | **Radiant Bursts**     | Rays radiating from a focal point               |
+| 🧵  | **Thread Mesh**        | Woven bidirectional strand fields               |
+| 🪨  | **Marble Veins**       | Branching mineral crack networks                |
+| 🫧  | **Iso Blobs**          | Nested heat-map island contours                 |
+| 🌀  | **Spiral Arms**        | Logarithmic galaxy-like spirals                 |
+| ⚡  | **Lightning Bolts**    | Branching electrical discharge                  |
+| 🔵  | **Dot Matrix**         | Noise-modulated dot grids                       |
+| 🔶  | **Voronoi Edges**      | Irregular cracked-glass cell boundaries         |
+| 🌊  | **Wave Collision**     | Overlapping circular wave interference          |
+| ✏️  | **Crosshatch**         | Engraving-style layered hatching                |
+| 🎯  | **Pendulum Traces**    | Lissajous / harmonograph curves                 |
+| 💥  | **Shatter Lines**      | Radiating fracture patterns with ring fragments |
+| 💨  | **Smoke Plumes**       | Rising turbulent column traces                  |
+| 🐝  | **Hex Weave**          | Organic hexagonal tessellation                  |
 
 ### 🛠️ Tools & Controls
 
@@ -61,16 +61,16 @@ Every mode uses a different geometric primitive and compositional rhythm — no 
 
 ### ⌨️ Keyboard Shortcuts
 
-| Key | Action |
-|---|---|
-| `R` | Randomize seed + colors |
-| `F` | Toggle fullscreen preview |
-| `G` | Open seed explorer gallery |
-| `1`–`9`, `0` | Switch to mode 1–10 |
-| `Cmd/Ctrl + Z` | Undo |
-| `Cmd/Ctrl + Shift + Z` | Redo |
-| `Cmd/Ctrl + Shift + C` | Copy SVG to clipboard |
-| `Esc` | Close fullscreen / explorer |
+| Key                    | Action                      |
+| ---------------------- | --------------------------- |
+| `R`                    | Randomize seed + colors     |
+| `F`                    | Toggle fullscreen preview   |
+| `G`                    | Open seed explorer gallery  |
+| `1`–`9`, `0`           | Switch to mode 1–10         |
+| `Cmd/Ctrl + Z`         | Undo                        |
+| `Cmd/Ctrl + Shift + Z` | Redo                        |
+| `Cmd/Ctrl + Shift + C` | Copy SVG to clipboard       |
+| `Esc`                  | Close fullscreen / explorer |
 
 ---
 
@@ -126,15 +126,15 @@ https://goatxyz.github.io/GoatAbstract/?render
 
 ### Parameters
 
-| Param | Description | Default |
-|---|---|---|
-| `render` | **Required.** Enables render mode (no UI). | — |
-| `seed` | Seed string for deterministic output. | Random |
-| `mode` | Art mode ID (e.g. `spiral-arms`, `marble-veins`). | Random |
-| `w` | Width in pixels. | `1600` |
-| `h` | Height in pixels. | `900` |
-| `line` | Stroke color as 6-digit hex (no `#`). | Random |
-| `bg` | Background color as 6-digit hex (no `#`). | Random |
+| Param    | Description                                       | Default |
+| -------- | ------------------------------------------------- | ------- |
+| `render` | **Required.** Enables render mode (no UI).        | —       |
+| `seed`   | Seed string for deterministic output.             | Random  |
+| `mode`   | Art mode ID (e.g. `spiral-arms`, `marble-veins`). | Random  |
+| `w`      | Width in pixels.                                  | `1600`  |
+| `h`      | Height in pixels.                                 | `900`   |
+| `line`   | Stroke color as 6-digit hex (no `#`).             | Random  |
+| `bg`     | Background color as 6-digit hex (no `#`).         | Random  |
 
 ### Examples
 
@@ -195,15 +195,15 @@ npx tsc -b --noEmit   # 0 errors
 
 ## 📦 Tech Stack
 
-| Layer | Technology |
-|---|---|
-| ⚛️ Framework | React 19 |
-| 🔷 Language | TypeScript 5.9 |
-| ⚡ Build | Vite 8 |
-| 🧪 Test | Vitest 4 + Testing Library |
-| 🎨 Design System | KolFluent (Fluent 2) |
-| 📐 Lint | ESLint + typescript-eslint |
-| 📦 Package Manager | pnpm |
+| Layer              | Technology                 |
+| ------------------ | -------------------------- |
+| ⚛️ Framework       | React 19                   |
+| 🔷 Language        | TypeScript 5.9             |
+| ⚡ Build           | Vite 8                     |
+| 🧪 Test            | Vitest 4 + Testing Library |
+| 🎨 Design System   | KolFluent (Fluent 2)       |
+| 📐 Lint            | ESLint + typescript-eslint |
+| 📦 Package Manager | pnpm                       |
 
 ### 🎨 Design System: KolFluent
 
@@ -219,12 +219,12 @@ The UI follows the [KolFluent](https://github.com/GoatXYZ/KolFluent) design syst
 
 ## 📊 Bundle
 
-| Asset | Size | Gzipped |
-|---|---|---|
-| JavaScript | 229 KB | 71 KB |
-| CSS | 15.6 KB | 3.3 KB |
-| HTML | 0.74 KB | 0.44 KB |
-| **Total** | **~245 KB** | **~75 KB** |
+| Asset      | Size        | Gzipped    |
+| ---------- | ----------- | ---------- |
+| JavaScript | 229 KB      | 71 KB      |
+| CSS        | 15.6 KB     | 3.3 KB     |
+| HTML       | 0.74 KB     | 0.44 KB    |
+| **Total**  | **~245 KB** | **~75 KB** |
 
 Zero external runtime dependencies beyond React + ReactDOM.
 

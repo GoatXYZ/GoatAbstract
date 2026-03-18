@@ -1,22 +1,19 @@
 type PreviewFrameProps = {
-  svgMarkup: string
-  width: number
-  height: number
-  onFullscreen: () => void
-}
+  svgMarkup: string;
+  width: number;
+  height: number;
+  onFullscreen: () => void;
+};
 
-export function PreviewFrame({
-  svgMarkup,
-  width,
-  height,
-  onFullscreen,
-}: PreviewFrameProps) {
+export function PreviewFrame({ svgMarkup, width, height, onFullscreen }: PreviewFrameProps) {
   return (
     <section className="preview-panel">
       <div className="preview-meta">
         <p>Preview</p>
         <span>
-          {width}{'\u2009\u00d7\u2009'}{height}
+          {width}
+          {"\u2009\u00d7\u2009"}
+          {height}
         </span>
       </div>
       <div
@@ -25,7 +22,10 @@ export function PreviewFrame({
         tabIndex={0}
         onClick={onFullscreen}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onFullscreen() }
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onFullscreen();
+          }
         }}
         aria-label="Open fullscreen preview"
       >
@@ -36,5 +36,5 @@ export function PreviewFrame({
         />
       </div>
     </section>
-  )
+  );
 }
