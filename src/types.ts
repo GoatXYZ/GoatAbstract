@@ -78,6 +78,17 @@ export type IsoBlobsParams = {
   irregularity: number
 }
 
+export type SpiralArmsParams = { armCount: number; turns: number; spread: number }
+export type DotMatrixParams = { columns: number; sizeRange: number; chaos: number }
+export type LightningBoltsParams = { boltCount: number; branches: number; jaggedness: number }
+export type VoronoiEdgesParams = { cellCount: number; jitter: number; thickness: number }
+export type WaveCollisionParams = { sourceCount: number; waveCount: number; decay: number }
+export type CrosshatchParams = { layerCount: number; density: number; angle: number }
+export type PendulumTracesParams = { traceCount: number; complexity: number; decay: number }
+export type ShatterLinesParams = { impactCount: number; rayCount: number; ringCount: number }
+export type SmokePlumesParams = { plumeCount: number; turbulence: number; segments: number }
+export type HexWeaveParams = { gridSize: number; displacement: number; irregularity: number }
+
 // ─── Mode ID literal union ───────────────────────────────────────────────────
 
 export type ModeId =
@@ -91,6 +102,16 @@ export type ModeId =
   | 'thread-mesh'
   | 'marble-veins'
   | 'iso-blobs'
+  | 'spiral-arms'
+  | 'dot-matrix'
+  | 'lightning-bolts'
+  | 'voronoi-edges'
+  | 'wave-collision'
+  | 'crosshatch'
+  | 'pendulum-traces'
+  | 'shatter-lines'
+  | 'smoke-plumes'
+  | 'hex-weave'
 
 // ─── Discriminated union of full settings ────────────────────────────────────
 
@@ -104,6 +125,16 @@ export type RadiantBurstsSettings = SharedSettings & { mode: 'radiant-bursts' } 
 export type ThreadMeshSettings = SharedSettings & { mode: 'thread-mesh' } & ThreadMeshParams
 export type MarbleVeinsSettings = SharedSettings & { mode: 'marble-veins' } & MarbleVeinsParams
 export type IsoBlobsSettings = SharedSettings & { mode: 'iso-blobs' } & IsoBlobsParams
+export type SpiralArmsSettings = SharedSettings & { mode: 'spiral-arms' } & SpiralArmsParams
+export type DotMatrixSettings = SharedSettings & { mode: 'dot-matrix' } & DotMatrixParams
+export type LightningBoltsSettings = SharedSettings & { mode: 'lightning-bolts' } & LightningBoltsParams
+export type VoronoiEdgesSettings = SharedSettings & { mode: 'voronoi-edges' } & VoronoiEdgesParams
+export type WaveCollisionSettings = SharedSettings & { mode: 'wave-collision' } & WaveCollisionParams
+export type CrosshatchSettings = SharedSettings & { mode: 'crosshatch' } & CrosshatchParams
+export type PendulumTracesSettings = SharedSettings & { mode: 'pendulum-traces' } & PendulumTracesParams
+export type ShatterLinesSettings = SharedSettings & { mode: 'shatter-lines' } & ShatterLinesParams
+export type SmokePlumesSettings = SharedSettings & { mode: 'smoke-plumes' } & SmokePlumesParams
+export type HexWeaveSettings = SharedSettings & { mode: 'hex-weave' } & HexWeaveParams
 
 export type ArtSettings =
   | NoiseDunesSettings
@@ -116,6 +147,16 @@ export type ArtSettings =
   | ThreadMeshSettings
   | MarbleVeinsSettings
   | IsoBlobsSettings
+  | SpiralArmsSettings
+  | DotMatrixSettings
+  | LightningBoltsSettings
+  | VoronoiEdgesSettings
+  | WaveCollisionSettings
+  | CrosshatchSettings
+  | PendulumTracesSettings
+  | ShatterLinesSettings
+  | SmokePlumesSettings
+  | HexWeaveSettings
 
 // ─── Shared result ───────────────────────────────────────────────────────────
 

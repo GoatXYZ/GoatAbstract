@@ -9,36 +9,32 @@ describe('App', () => {
 
     expect(screen.getByLabelText(/w \(px\)/i)).toHaveValue(1600)
     expect(screen.getByLabelText(/h \(px\)/i)).toHaveValue(900)
-    expect(screen.getByLabelText(/seed/i)).toHaveValue('nightshift')
+    // Seed is randomized on each load
+    expect((screen.getByLabelText(/seed/i) as HTMLInputElement).value.length).toBeGreaterThan(0)
     expect(screen.getByRole('button', { name: /randomize/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /download svg/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /download png/i })).toBeInTheDocument()
     expect(screen.getByTitle(/wave art preview/i)).toBeInTheDocument()
   })
 
-  it('renders the mode tab bar with all modes', () => {
+  it('renders the mode selector', () => {
     render(<App />)
 
-    const tablist = screen.getByRole('tablist', { name: /art mode/i })
-    expect(tablist).toBeInTheDocument()
-
-    const tabs = screen.getAllByRole('tab')
-    expect(tabs).toHaveLength(10)
-
-    // Default mode is Noise Dunes
-    expect(tabs[0]).toHaveAttribute('data-active')
-    expect(tabs[0]).toHaveTextContent('Noise Dunes')
+    const trigger = screen.getByRole('button', { name: /art mode/i })
+    expect(trigger).toBeInTheDocument()
   })
 
-  it('switches mode when clicking a tab', async () => {
+  it('switches mode via the dropdown menu', async () => {
     const user = userEvent.setup()
     render(<App />)
 
-    const contourTab = screen.getByRole('tab', { name: /contour rings/i })
-    await user.click(contourTab)
+    const trigger = screen.getByRole('button', { name: /art mode/i })
+    await user.click(trigger)
 
-    expect(contourTab).toHaveAttribute('data-active')
-    // The preview should still render
+    const contourOption = screen.getByRole('option', { name: /contour rings/i })
+    await user.click(contourOption)
+
+    expect(trigger).toHaveTextContent(/contour rings/i)
     expect(screen.getByTitle(/wave art preview/i)).toBeInTheDocument()
   })
 

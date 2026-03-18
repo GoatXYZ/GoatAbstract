@@ -1,9 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
-
 :root {
-  --font-display: 'Instrument Serif', Georgia, serif;
-  --font-body: 'DM Sans', 'Avenir Next', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --font-display: 'Segoe UI Variable', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Segoe UI Variable', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: Consolas, 'Courier New', Courier, monospace;
+
+  --borderRadiusMedium: 4px;
+  --borderRadiusLarge: 6px;
+  --borderRadiusXLarge: 8px;
+
+  --durationFast: 150ms;
+  --durationNormal: 200ms;
+  --durationSlow: 300ms;
+  --durationSlower: 400ms;
+  --curveDecelerateMid: cubic-bezier(0, 0, 0, 1);
+  --curveEasyEase: cubic-bezier(0.33, 0, 0.67, 1);
 
   line-height: 1.5;
   font-weight: 400;
@@ -16,45 +25,49 @@
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --bg: #1c1917;
-  --bg-2: #211f1d;
-  --surface: #292524;
-  --surface-raised: #302c2a;
-  --border: rgba(214, 188, 155, 0.15);
-  --border-strong: rgba(214, 188, 155, 0.30);
-  --text: #d6d3d1;
-  --text-strong: #fafaf9;
-  --text-muted: #a8a29e;
-  --accent: #c2956a;
-  --accent-hover: #d4a87d;
-  --accent-2: #a3b18a;
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --dot-color: rgba(214, 188, 155, 0.06);
-  --input-bg: #1c1917;
-  --preview-bg: #171412;
+  --bg: #141414;
+  --bg-2: #1f1f1f;
+  --surface: #292929;
+  --surface-raised: #333333;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.13);
+  --text: #d6d6d6;
+  --text-strong: #ffffff;
+  --text-muted: #adadad;
+  --accent: #479ef5;
+  --accent-hover: #62abf5;
+  --accent-2: #77bcf8;
+  --shadow: 0px 2px 4px rgba(0,0,0,0.48), 0px 0px 2px rgba(0,0,0,0.24);
+  --shadow-elevated: 0px 8px 16px rgba(0,0,0,0.48), 0px 0px 2px rgba(0,0,0,0.24);
+  --dot-color: rgba(71, 158, 245, 0.025);
+  --input-bg: #1f1f1f;
+  --preview-bg: #0f0f0f;
+  --acrylic-bg: rgba(41, 41, 41, 0.72);
+  --focus-ring: 0 0 0 2px rgba(71, 158, 245, 0.2);
 }
 
 [data-theme="light"] {
   color-scheme: light;
 
-  --bg: #faf8f5;
-  --bg-2: #f5f2ed;
+  --bg: #fafafa;
+  --bg-2: #f5f5f5;
   --surface: #ffffff;
   --surface-raised: #ffffff;
-  --border: rgba(120, 90, 50, 0.12);
-  --border-strong: rgba(120, 90, 50, 0.25);
-  --text: #57534e;
-  --text-strong: #1c1917;
-  --text-muted: #78716c;
-  --accent: #9a6b3d;
-  --accent-hover: #7d5530;
-  --accent-2: #5a7247;
-  --shadow: 0 2px 8px rgba(120, 90, 50, 0.08), 0 1px 2px rgba(120, 90, 50, 0.06);
-  --shadow-elevated: 0 8px 32px rgba(120, 90, 50, 0.12);
-  --dot-color: rgba(120, 90, 50, 0.05);
-  --input-bg: #faf8f5;
-  --preview-bg: #f0ece6;
+  --border: rgba(0, 0, 0, 0.07);
+  --border-strong: rgba(0, 0, 0, 0.13);
+  --text: #424242;
+  --text-strong: #242424;
+  --text-muted: #616161;
+  --accent: #0f6cbd;
+  --accent-hover: #115ea3;
+  --accent-2: #0f548c;
+  --shadow: 0px 2px 4px rgba(0,0,0,0.14), 0px 0px 2px rgba(0,0,0,0.12);
+  --shadow-elevated: 0px 8px 16px rgba(0,0,0,0.14), 0px 0px 2px rgba(0,0,0,0.12);
+  --dot-color: rgba(15, 108, 189, 0.025);
+  --input-bg: #ffffff;
+  --preview-bg: #f5f5f5;
+  --acrylic-bg: rgba(255, 255, 255, 0.72);
+  --focus-ring: 0 0 0 2px rgba(15, 108, 189, 0.15);
 }
 
 * {
@@ -63,7 +76,7 @@
 
 html {
   background: var(--bg);
-  transition: background 0.3s ease;
+  transition: background var(--durationSlower) var(--curveEasyEase);
 }
 
 body {
@@ -75,7 +88,8 @@ body {
     radial-gradient(circle, var(--dot-color) 1px, transparent 1px) 0 0 / 24px 24px,
     var(--bg);
   font-family: var(--font-body);
-  transition: color 0.3s ease, background 0.3s ease;
+  font-size: 14px;
+  transition: color var(--durationSlower) var(--curveEasyEase), background var(--durationSlower) var(--curveEasyEase);
 }
 
 body,
@@ -102,12 +116,11 @@ p {
 
 h1 {
   font-family: var(--font-display);
-  font-style: italic;
   color: var(--text-strong);
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
-  line-height: 1.05;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  line-height: 1.1;
   letter-spacing: -0.02em;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 a {

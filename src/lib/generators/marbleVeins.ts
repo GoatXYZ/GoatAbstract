@@ -9,6 +9,8 @@ const generateMarbleVeins = (settings: ArtSettings): WavePath[] => {
 
   const driftScale = drift / 100
 
+  const MAX_PATHS = 500
+
   const growVein = (
     startX: number,
     startY: number,
@@ -17,6 +19,7 @@ const generateMarbleVeins = (settings: ArtSettings): WavePath[] => {
     parentWidth: number,
     parentOpacity: number,
   ) => {
+    if (paths.length >= MAX_PATHS) return
     const steps = 12 + Math.round(random() * 8)
     const stepLen = Math.max(width, height) * (0.02 + random() * 0.04)
     const points: string[] = [`M ${format(startX)} ${format(startY)}`]

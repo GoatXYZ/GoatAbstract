@@ -9,6 +9,16 @@ import { orbitArcsDefinition } from './generators/orbitArcs'
 import { radiantBurstsDefinition } from './generators/radiantBursts'
 import { rippleFieldsDefinition } from './generators/rippleFields'
 import { threadMeshDefinition } from './generators/threadMesh'
+import { spiralArmsDefinition } from './generators/spiralArms'
+import { dotMatrixDefinition } from './generators/dotMatrix'
+import { lightningBoltsDefinition } from './generators/lightningBolts'
+import { voronoiEdgesDefinition } from './generators/voronoiEdges'
+import { waveCollisionDefinition } from './generators/waveCollision'
+import { crosshatchDefinition } from './generators/crosshatch'
+import { pendulumTracesDefinition } from './generators/pendulumTraces'
+import { shatterLinesDefinition } from './generators/shatterLines'
+import { smokePlumesDefinition } from './generators/smokePlumes'
+import { hexWeaveDefinition } from './generators/hexWeave'
 import { serializeArtSvg } from './serialize'
 
 export const MODE_REGISTRY: ModeDefinition[] = [
@@ -22,6 +32,16 @@ export const MODE_REGISTRY: ModeDefinition[] = [
   threadMeshDefinition,
   marbleVeinsDefinition,
   isoBlobsDefinition,
+  spiralArmsDefinition,
+  dotMatrixDefinition,
+  lightningBoltsDefinition,
+  voronoiEdgesDefinition,
+  waveCollisionDefinition,
+  crosshatchDefinition,
+  pendulumTracesDefinition,
+  shatterLinesDefinition,
+  smokePlumesDefinition,
+  hexWeaveDefinition,
 ]
 
 export const ORDERED_MODE_IDS: ModeId[] = MODE_REGISTRY.map((m) => m.id)

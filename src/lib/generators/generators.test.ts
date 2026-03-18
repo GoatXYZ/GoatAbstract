@@ -5,8 +5,8 @@ import type { ModeId } from '../../types'
 const SHARED = { width: 800, height: 600, seed: 'test-seed' }
 
 describe('mode registry', () => {
-  it('contains exactly 10 modes', () => {
-    expect(MODE_REGISTRY).toHaveLength(10)
+  it('contains exactly 20 modes', () => {
+    expect(MODE_REGISTRY).toHaveLength(20)
   })
 
   it('has unique IDs', () => {

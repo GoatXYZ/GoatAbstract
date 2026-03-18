@@ -27,8 +27,6 @@ const getInitialTheme = (): Theme => {
   }
 }
 
-const INITIAL_MODE: ModeId = 'noise-dunes'
-
 const hslToHex = (h: number, s: number, l: number): string => {
   const s1 = s / 100
   const l1 = l / 100
@@ -54,7 +52,7 @@ const parseUrlSettings = (): ArtSettings | null => {
   try {
     const hash = window.location.hash.slice(1)
     if (!hash) return null
-    const raw = JSON.parse(decodeURIComponent(escape(atob(hash))))
+    const raw = JSON.parse(decodeURIComponent(atob(hash)))
     if (!raw || typeof raw !== 'object') return null
     if (typeof raw.mode !== 'string' || typeof raw.width !== 'number' || typeof raw.height !== 'number' || typeof raw.seed !== 'string') return null
     if (!MODE_REGISTRY.some(m => m.id === raw.mode)) return null
@@ -68,7 +66,10 @@ const parseUrlSettings = (): ArtSettings | null => {
     const def = getModeDefinition(raw.mode as ModeId)
     const merged: Record<string, unknown> = { ...base }
     for (const param of def.params) {
-      if (typeof raw[param.key] === 'number') merged[param.key] = raw[param.key]
+      const v = raw[param.key]
+      if (typeof v === 'number' && Number.isFinite(v)) {
+        merged[param.key] = Math.min(param.max, Math.max(param.min, v))
+      }
     }
     if (typeof raw.strokeScale === 'number') merged.strokeScale = raw.strokeScale
     if (typeof raw.opacityScale === 'number') merged.opacityScale = raw.opacityScale
@@ -148,7 +149,13 @@ function App() {
       fromUrlRef.current = true
       return fromUrl
     }
-    return buildModeSettings({ width: 1600, height: 900, seed: 'nightshift' }, INITIAL_MODE, getInitialTheme())
+    const randomModeIndex = Math.floor(Math.random() * MODE_REGISTRY.length)
+    const randomMode = MODE_REGISTRY[randomModeIndex].id
+    const palette = randomPalette()
+    return {
+      ...buildModeSettings({ width: 1600, height: 900, seed: createRandomSeed() }, randomMode, getInitialTheme()),
+      ...palette,
+    } as ArtSettings
   })
   const [aspectLocked, setAspectLocked] = useState(false)
   const [fullscreen, setFullscreen] = useState(false)
@@ -287,7 +294,7 @@ function App() {
 
   const shareUrl = () => {
     try {
-      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(settings))))
+      const encoded = btoa(encodeURIComponent(JSON.stringify(settings)))
       const url = `${window.location.origin}${window.location.pathname}#${encoded}`
       navigator.clipboard.writeText(url)
         .then(() => showToast('Link copied'))
@@ -342,11 +349,17 @@ function App() {
           className="brand"
           type="button"
           onClick={() => {
-            setSettings(buildModeSettings({ width: 1600, height: 900, seed: 'nightshift' }, INITIAL_MODE, themeRef.current))
+            const modeIndex = Math.floor(Math.random() * MODE_REGISTRY.length)
+            const mode = MODE_REGISTRY[modeIndex].id
+            const palette = randomPalette()
+            setSettings({
+              ...buildModeSettings({ width: 1600, height: 900, seed: createRandomSeed() }, mode, themeRef.current),
+              ...palette,
+            } as ArtSettings)
             setAspectLocked(false)
             window.history.replaceState(null, '', window.location.pathname)
           }}
-          title="Reset to defaults"
+          title="Randomize everything"
         >
           GoatAbstract
         </button>
