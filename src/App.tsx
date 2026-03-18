@@ -1,4 +1,4 @@
-import { startTransition, useEffect, useRef, useState } from 'react'
+import { startTransition, useCallback, useEffect, useRef, useState } from 'react'
 import './App.css'
 import { ControlPanel } from './components/ControlPanel'
 import { FullscreenOverlay } from './components/FullscreenOverlay'
@@ -48,6 +48,10 @@ const randomPalette = () => {
   }
 }
 
+const normalizeSharedDimension = (value: number) => Math.max(64, Math.round(value))
+
+const isHexColor = (value: string) => /^#[0-9a-f]{6}$/i.test(value)
+
 const parseUrlSettings = (): ArtSettings | null => {
   try {
     const hash = window.location.hash.slice(1)
@@ -56,10 +60,13 @@ const parseUrlSettings = (): ArtSettings | null => {
     if (!raw || typeof raw !== 'object') return null
     if (typeof raw.mode !== 'string' || typeof raw.width !== 'number' || typeof raw.height !== 'number' || typeof raw.seed !== 'string') return null
     if (!MODE_REGISTRY.some(m => m.id === raw.mode)) return null
+    const width = normalizeSharedDimension(raw.width)
+    const height = normalizeSharedDimension(raw.height)
+    const seed = raw.seed.trim() || 'nightshift'
     // Rebuild from safe defaults, only overlay validated fields
     const theme = getInitialTheme()
     const base = buildModeSettings(
-      { width: raw.width, height: raw.height, seed: raw.seed },
+      { width, height, seed },
       raw.mode as ModeId,
       theme,
     )
@@ -71,10 +78,18 @@ const parseUrlSettings = (): ArtSettings | null => {
         merged[param.key] = Math.min(param.max, Math.max(param.min, v))
       }
     }
-    if (typeof raw.strokeScale === 'number') merged.strokeScale = raw.strokeScale
-    if (typeof raw.opacityScale === 'number') merged.opacityScale = raw.opacityScale
-    if (typeof raw.lineColor === 'string') merged.lineColor = raw.lineColor
-    if (typeof raw.backgroundColor === 'string') merged.backgroundColor = raw.backgroundColor
+    if (typeof raw.strokeScale === 'number' && Number.isFinite(raw.strokeScale)) {
+      merged.strokeScale = Math.min(4, Math.max(0.2, raw.strokeScale))
+    }
+    if (typeof raw.opacityScale === 'number' && Number.isFinite(raw.opacityScale)) {
+      merged.opacityScale = Math.min(2, Math.max(0.1, raw.opacityScale))
+    }
+    if (typeof raw.lineColor === 'string' && isHexColor(raw.lineColor)) {
+      merged.lineColor = raw.lineColor
+    }
+    if (typeof raw.backgroundColor === 'string' && isHexColor(raw.backgroundColor)) {
+      merged.backgroundColor = raw.backgroundColor
+    }
     return merged as ArtSettings
   } catch {
     return null
@@ -141,13 +156,11 @@ const downloadPng = async (svgMarkup: string, width: number, height: number, mod
 }
 
 function App() {
+  const initialUrlSettings = parseUrlSettings()
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
-  const fromUrlRef = useRef(false)
   const [settings, setSettings] = useState<ArtSettings>(() => {
-    const fromUrl = parseUrlSettings()
-    if (fromUrl) {
-      fromUrlRef.current = true
-      return fromUrl
+    if (initialUrlSettings) {
+      return initialUrlSettings
     }
     const randomModeIndex = Math.floor(Math.random() * MODE_REGISTRY.length)
     const randomMode = MODE_REGISTRY[randomModeIndex].id
@@ -194,11 +207,6 @@ function App() {
   useEffect(() => {
     themeRef.current = theme
     document.documentElement.dataset.theme = theme
-    if (fromUrlRef.current) {
-      fromUrlRef.current = false
-      return
-    }
-    setSettings((current) => applyThemeColors(current, theme))
   }, [theme])
 
   useEffect(() => {
@@ -213,11 +221,12 @@ function App() {
     setTheme((current) => {
       const next = current === 'dark' ? 'light' : 'dark'
       localStorage.setItem('goatabstract-theme', next)
+      setSettings((settingsCurrent) => applyThemeColors(settingsCurrent, next))
       return next
     })
   }
 
-  const handleModeChange = (id: ModeId) => {
+  const handleModeChange = useCallback((id: ModeId) => {
     startTransition(() => {
       setSettings((current) =>
         buildModeSettings(
@@ -227,7 +236,7 @@ function App() {
         ),
       )
     })
-  }
+  }, [])
 
   const handleSettingChange = (key: string, value: string | number) => {
     setSettings((current) => {
@@ -257,7 +266,7 @@ function App() {
     setAspectLocked((prev) => !prev)
   }
 
-  const randomize = () => {
+  const randomize = useCallback(() => {
     startTransition(() => {
       const palette = randomPalette()
       setSettings((current) => ({
@@ -266,31 +275,31 @@ function App() {
         ...palette,
       }))
     })
-  }
+  }, [])
 
-  const undo = () => {
+  const undo = useCallback(() => {
     if (historyTimerRef.current) clearTimeout(historyTimerRef.current)
     if (historyIndexRef.current > 0) {
       historyIndexRef.current -= 1
       skipHistoryRef.current = true
       setSettings(historyRef.current[historyIndexRef.current])
     }
-  }
+  }, [])
 
-  const redo = () => {
+  const redo = useCallback(() => {
     if (historyTimerRef.current) clearTimeout(historyTimerRef.current)
     if (historyIndexRef.current < historyRef.current.length - 1) {
       historyIndexRef.current += 1
       skipHistoryRef.current = true
       setSettings(historyRef.current[historyIndexRef.current])
     }
-  }
+  }, [])
 
-  const copySvg = () => {
+  const copySvg = useCallback(() => {
     navigator.clipboard.writeText(art.svg)
       .then(() => showToast('SVG copied'))
       .catch(() => showToast('Copy failed'))
-  }
+  }, [art.svg])
 
   const shareUrl = () => {
     try {
@@ -312,29 +321,31 @@ function App() {
     setExploring(false)
   }
 
-  // Keyboard shortcuts via ref to avoid stale closures
   const keyHandlerRef = useRef<(e: KeyboardEvent) => void>(() => {})
-  keyHandlerRef.current = (e: KeyboardEvent) => {
-    const target = e.target as HTMLElement
-    if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') return
 
-    const mod = e.metaKey || e.ctrlKey
+  useEffect(() => {
+    keyHandlerRef.current = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') return
 
-    if (mod && e.key === 'z' && !e.shiftKey) { e.preventDefault(); undo() }
-    else if (mod && e.key === 'z' && e.shiftKey) { e.preventDefault(); redo() }
-    else if (mod && e.shiftKey && e.key.toLowerCase() === 'c') { e.preventDefault(); copySvg() }
-    else if (e.key === 'r' && !mod) { e.preventDefault(); randomize() }
-    else if (e.key === 'f' && !mod) { e.preventDefault(); setFullscreen(f => !f) }
-    else if (e.key === 'g' && !mod) { e.preventDefault(); setExploring(x => !x) }
-    else if (e.key === 'Escape') { setFullscreen(false); setExploring(false) }
-    else if (!mod && !e.shiftKey && e.key >= '1' && e.key <= '9') {
-      const idx = parseInt(e.key) - 1
-      if (idx < MODE_REGISTRY.length) { e.preventDefault(); handleModeChange(MODE_REGISTRY[idx].id) }
+      const mod = e.metaKey || e.ctrlKey
+
+      if (mod && e.key === 'z' && !e.shiftKey) { e.preventDefault(); undo() }
+      else if (mod && e.key === 'z' && e.shiftKey) { e.preventDefault(); redo() }
+      else if (mod && e.shiftKey && e.key.toLowerCase() === 'c') { e.preventDefault(); copySvg() }
+      else if (e.key === 'r' && !mod) { e.preventDefault(); randomize() }
+      else if (e.key === 'f' && !mod) { e.preventDefault(); setFullscreen(f => !f) }
+      else if (e.key === 'g' && !mod) { e.preventDefault(); setExploring(x => !x) }
+      else if (e.key === 'Escape') { setFullscreen(false); setExploring(false) }
+      else if (!mod && !e.shiftKey && e.key >= '1' && e.key <= '9') {
+        const idx = parseInt(e.key) - 1
+        if (idx < MODE_REGISTRY.length) { e.preventDefault(); handleModeChange(MODE_REGISTRY[idx].id) }
+      }
+      else if (!mod && !e.shiftKey && e.key === '0' && MODE_REGISTRY.length >= 10) {
+        e.preventDefault(); handleModeChange(MODE_REGISTRY[9].id)
+      }
     }
-    else if (!mod && !e.shiftKey && e.key === '0' && MODE_REGISTRY.length >= 10) {
-      e.preventDefault(); handleModeChange(MODE_REGISTRY[9].id)
-    }
-  }
+  }, [copySvg, handleModeChange, randomize, redo, undo])
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => keyHandlerRef.current(e)
