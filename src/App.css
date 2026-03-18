@@ -152,6 +152,16 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Toolbar right group — push to far right */
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 /* Theme toggle — Fluent subtle button */
 
 .theme-toggle {
