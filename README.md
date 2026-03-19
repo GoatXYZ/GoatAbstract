@@ -114,7 +114,7 @@ src/
 
 ---
 
-## 🔌 Render API (Fake API for Embeds)
+## 🔌 Render API (Embeds)
 
 Use query params to generate art with no UI — just the raw SVG filling the viewport. Works in iframes, browser tabs, and bookmarks.
 
@@ -249,5 +249,5 @@ MIT
 ---
 
 <p align="center">
-  🐐 Built with <a href="https://github.com/GoatXYZ/GoatAbstract">GoatAbstract</a>
+  🐐 Built by <a href="https://github.com/GoatXYZ">GOAT.XYZ</a>
 </p>
